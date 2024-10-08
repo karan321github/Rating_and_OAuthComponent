@@ -1,0 +1,58 @@
+﻿@model Product
+
+<h1>@Model.Name</h1>
+<p>@Model.Description</p>
+<p>Average Rating: @Model.AverageRating</p>
+
+<!-- Display stars for rating -->
+<div id="rating-stars" class="mb-3">
+    @for (int i = 1; i <= 5; i++)
+    {
+        <span class="fa fa-star @(i <= Model.AverageRating ? "text-warning" : "text-muted")"
+              data-value="@i"
+              style="cursor:pointer; font-size: 24px;"
+              onclick="rateProduct(@i)"></span>
+    }
+</div>
+
+<!-- Add a script to handle star click and send AJAX request -->
+@section Scripts {
+    <script>
+        function rateProduct(value) {
+            var productId = @Model.Id;
+            $.ajax({
+                url: '@Url.Action("RateProduct", "Product")',
+                type: 'POST',
+                data: {
+                    productId: productId,
+                    ratingValue: value
+                },
+                success: function (response) {
+                    alert('Rating submitted successfully: ' + value);
+
+                    // Update the stars based on the rating value
+                    updateStars(value);
+                },
+                error: function () {
+                    alert('Error submitting rating');
+                }
+            });
+        }
+
+        function updateStars(rating) {
+            // Get all star elements
+            var stars = document.querySelectorAll('#rating-stars .fa-star');
+
+            // Loop through stars and update their classes
+            stars.forEach(function (star, index) {
+                if (index < rating) {
+                    star.classList.remove('text-muted');
+                    star.classList.add('text-warning');  // Bootstrap class for yellow/golden color
+                } else {
+                    star.classList.remove('text-warning');
+                    star.classList.add('text-muted');  // Bootstrap class for gray color
+                }
+            });
+        }
+    </script>
+}
