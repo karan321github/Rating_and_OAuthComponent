@@ -49,11 +49,10 @@ namespace GoogleAuth.Controllers
             _context.Ratings.Add(rating);
             _context.SaveChanges();
 
-            // Recalculate the average rating
             product.AverageRating = product.Ratings.Any() ? product.Ratings.Average(r => r.Value) : 0;
             _context.SaveChanges();
 
-            return Ok(); // Return success
+            return Ok(); 
         }
     }
 }

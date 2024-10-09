@@ -145,3 +145,4 @@ C:\Users\Karan\source\repos\GoogleAuth\GoogleAuth\obj\Debug\net8.0\refint\Google
 C:\Users\Karan\source\repos\GoogleAuth\GoogleAuth\obj\Debug\net8.0\GoogleAuth.pdb
 C:\Users\Karan\source\repos\GoogleAuth\GoogleAuth\obj\Debug\net8.0\GoogleAuth.genruntimeconfig.cache
 C:\Users\Karan\source\repos\GoogleAuth\GoogleAuth\obj\Debug\net8.0\ref\GoogleAuth.dll
+C:\Users\Karan\source\repos\GoogleAuth\GoogleAuth\obj\Debug\net8.0\GoogleAuth.sourcelink.json

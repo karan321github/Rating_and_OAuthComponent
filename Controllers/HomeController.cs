@@ -1,4 +1,5 @@
 using GoogleAuth.Models;
+using GoogleAuth.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,9 +10,23 @@ namespace GoogleAuth.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger )
         {
             _logger = logger;
+         
+        }
+        public IActionResult CourseSelection()
+        {
+            var model = checkBoxRepository.GetCourses();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CourseSelection(List<CheckBoxViewModel> courses)
+        {
+            var selectedCourses = courses.Where(x => x.isChecked).ToList();
+            return RedirectToAction("CourseSelection");
         }
 
         public IActionResult Index()
